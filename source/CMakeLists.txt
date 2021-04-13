@@ -75,6 +75,10 @@ target_link_libraries(agent_template ${COSMOS_LIBS})
 
 add_executable(hello_world "hello_world.cpp")
 add_executable(agent_arduino "agent_arduino.cpp")
+
+target_link_libraries(agent_arduino ${COSMOS_LIBS})
+
+
 #add_executable(myprogram "myprogram.cpp")
 
 #add_executable(daughter_01 "daughter_01.cpp")
