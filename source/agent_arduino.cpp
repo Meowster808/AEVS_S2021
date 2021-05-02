@@ -42,11 +42,11 @@
 
 std::string agentname = "arduino";
 std::string node = "null";
-std::string comport = "//./";
+std::string comport = "/dev/ttyACM0";
 int waitsec = 5; // wait to find other agents of your 'type/name', seconds
 int32_t request_run_program(string &request, string &response, Agent *); // extra request
 
-static Agent *agent; // to access the cosmos data, will change later
+Agent *agent; // to access the cosmos data, will change later
 
 #define MAXBUFFERSIZE 2560 // comm buffe for agents
 
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 {
 	int32_t iretn;
 
-    if (argc == 3)
+ /*  if (argc == 3)
     {
         node = argv[1];
         comport += argv[2];
@@ -72,12 +72,14 @@ int main(int argc, char *argv[])
         printf("Usage: arduino_agent node comport\n");
         exit (1);
     }
+*/
 
-	// Initialize the Agent
-    if (!(agent = new Agent(node, agentname, 1.)))
+
+    // Initialize the Agent
+    if (!(agent = new Agent(node, agentname, 1., MAXBUFFERSIZE, true)))
     {
         printf("Error starting server\n");
-		exit (AGENT_ERROR_JSON_CREATE);
+        exit (AGENT_ERROR_JSON_CREATE);
     }
 
 	// Add additional requests
@@ -94,12 +96,13 @@ int main(int argc, char *argv[])
 
     // Initialize connection to arduino
     cssl_start();
-    cssl_t *serial = cssl_open(comport.c_str(), 115200, 8, 0, 1);
+    cssl_t *serial = cssl_open(comport.c_str(), 9600, 8, 0, 1);
     cssl_settimeout(serial, 0, .1);
 
 	// Start performing the body of the agent
 	nmjd = currentmjd(0.);
     uint32_t counter = 0;
+
     while(agent->running())
 	{
 		// Set beginning of next cycle;
@@ -118,6 +121,7 @@ int main(int argc, char *argv[])
 //		if (sleept < 0) sleept = 0;
 //		COSMOS_USLEEP(sleept);
 	}
+
 	return 0;
 }
 

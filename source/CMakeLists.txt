@@ -74,10 +74,24 @@ target_link_libraries(agent_template ${COSMOS_LIBS})
 #add_deployment_file(${relativeDir} "bin")
 
 add_executable(hello_world "hello_world.cpp")
-add_executable(agent_arduino "agent_arduino.cpp")
 
+add_executable(agent_arduino "agent_arduino.cpp")
 target_link_libraries(agent_arduino ${COSMOS_LIBS})
 
+add_executable(agent_001 "agent_001.cpp")
+target_link_libraries(agent_001 ${COSMOS_LIBS})
+
+add_executable(agent_002 "agent_002.cpp")
+target_link_libraries(agent_002 ${COSMOS_LIBS})
+
+add_executable(agent_1test "agent_1test.cpp")
+target_link_libraries(agent_1test ${COSMOS_LIBS})
+
+add_executable(agent_2test "agent_2test.cpp")
+target_link_libraries(agent_2test ${COSMOS_LIBS})
+
+add_executable(agent_arduino_test "agent_arduino_test.cpp")
+target_link_libraries(agent_arduino_test ${COSMOS_LIBS})
 
 #add_executable(myprogram "myprogram.cpp")
 
